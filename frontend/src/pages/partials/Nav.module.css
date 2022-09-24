@@ -1,0 +1,56 @@
+header{
+    width: 100%;
+    height: 10vh;
+    padding:30px 100px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #181717;
+    border-bottom: 1px solid #000;
+}
+
+header ul{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+header h1{
+    color: #fff;
+}
+
+header span{
+    cursor: pointer;
+    color: #fff;
+}
+
+.perfil{
+    margin-top: 25px;
+    position: absolute;
+    width: 140px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: aliceblue;
+}
+
+.perfil li{
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+.perfil li a{
+    color: #000;
+
+}
+
+header li{
+    list-style: none;
+    font-size: 1.3em;
+}
+
+header a{
+    text-decoration: none;
+    color: #fff;
+}

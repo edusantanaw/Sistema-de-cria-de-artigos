@@ -1,0 +1,16 @@
+
+.article{
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.article h1{
+    align-self: center;
+    padding: 30px;
+}
+
+.article p {
+    width: 50%;
+    align-self: center;
+}
