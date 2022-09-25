@@ -2,6 +2,7 @@ const checkExists = require('../../helper/check-exists')
 const verifyId = require('../../helper/verifyId')
 const Articles = require('../../models/Articles')
 const Categories = require('../../models/Category')
+const User = require('../../models/User')
 
 const getArticles = async (req, res) => {
     try {
@@ -52,4 +53,22 @@ const getArticlesByCategory = async (req, res)=>{
 
 }
 
-module.exports = {getArticles, getArticlesById, getArticlesByCategory}
+const getArticlesByUser = async (req, res) =>{
+    const id = req.params._id
+    try{
+        verifyId(id)
+        const articles = await Articles.find({})
+        const articlesFilter = await articles.filter(article=> article.user._id === id)
+        console.log(articlesFilter)
+        if(articlesFilter.length == 0){
+            let msg = "Nenhum artigo encontrado!"
+            throw msg
+        }
+        res.status(200).send(articlesFilter)
+
+    } catch(msg){
+        res.status(401).send(msg)
+    }
+}
+
+module.exports = {getArticles, getArticlesById, getArticlesByCategory, getArticlesByUser}

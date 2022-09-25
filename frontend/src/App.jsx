@@ -15,6 +15,9 @@ import { RequireAuth } from './context/RequireAuth'
 import CreateAccount from './pages/CreateAccount'
 import CategoryaArticle from './pages/CategoryArticle'
 import Article from './pages/Article'
+import Articles from './pages/Articles'
+import MyArticles from './pages/MyArticles'
+import CreateArticle from './pages/CreateArticle'
 
 
 function App() {
@@ -23,11 +26,14 @@ function App() {
     <Router>
       <Nav />
       <Routes>
-        <Route exact path='/' element={ <RequireAuth><Home /></RequireAuth>} />
+        <Route exact path='/' element={ <Home />} />
         <Route path = '/category/:name'  element ={<CategoryaArticle/>}/>
         <Route path = '/category/article/:id' element = {<Article/>}/>
         <Route path='/login' element={ <Login />} />
         <Route path = '/createAccount' element = {<CreateAccount/>}  />
+        <Route path = '/articles' element ={<Articles />} />
+        <Route path = 'myarticles/:id' element = {<RequireAuth><MyArticles /></RequireAuth>} />
+        <Route path = 'craeteArticle' element = {<RequireAuth><CreateArticle/></RequireAuth>} />
       </Routes>
       <Footer />
     </Router>

@@ -1,7 +1,7 @@
 
 .article{
     width: 100%;
-    color: #fff;
+    color: #000;
     display: flex;
     flex-direction: column;
 }
@@ -11,6 +11,11 @@
 }
 
 .article p {
-    width: 50%;
+    width: 60%;
     align-self: center;
+}
+
+.article p::first-letter{
+    margin-left: 20px;
+    text-transform: uppercase;
 }

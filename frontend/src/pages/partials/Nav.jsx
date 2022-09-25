@@ -1,17 +1,25 @@
 import style from './Nav.module.css'
-import { Link } from 'react-router-dom'
-import {AuthContext} from '../../context/Auth'
-import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth} from '../../context/Auth'
 import { useState } from 'react'
 
 
 function Nav(){
+    
     const [visible, setVisible] = useState(false)
-    const auth = useContext(AuthContext)
+    const auth = useAuth()
     const signed = auth.signed
+    let id =''
 
-    const handleLogout = () =>{
-        auth.Logout()
+    if(signed){
+        id = auth.user._id
+    }
+    const navigate = useNavigate
+
+    
+    const handleLogout = async () =>{
+       await auth.Logout()
+        navigate('/')
     }
 
     const isVisible = () =>{
@@ -23,8 +31,8 @@ function Nav(){
             <h1><Link>logo</Link></h1>
             <ul>
                 <li><Link to ='/'>Home</Link></li>
-                <li><Link>Artigos</Link></li>
-                { signed ?  <li><Link>Meus Artigos</Link></li> : <li><Link to ='/login'>Login</Link></li>}
+                <li><Link to ='/articles'>Artigos</Link></li>
+                { signed ?  <li><Link to= {`myarticles/${id}`} >Meus Artigos</Link></li> : <li><Link to ='/login'>Login</Link></li>}
                 { signed && <li onClick={isVisible}><span>Perfil</span> {
                     visible &&  <ul className={style.perfil}>
                         <li><Link> Alterar senha</Link></li>

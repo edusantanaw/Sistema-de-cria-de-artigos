@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import styles from './CategoryArticle.module.css'
-import { Link } from 'react-router-dom'
+import ArticleCard from './partials/ArticleCard'
 
 function CategoryaArticle() {
 
@@ -23,19 +22,18 @@ function CategoryaArticle() {
     }, [category])
 
     return (
-        <div className={styles.content}>
+        <div className='content'>
             <h1>Artigos:</h1>
-            <div className={styles.articles}>
-                {articles.length > 0 ? articles.map((article) => (
-                    <Link to={`/category/article/${article._id}`}>
-                        <div className={styles.articles_card} >
-                            <h1>{article.title}</h1>
-                            <p>{article.summary}</p>
-                        </div>
-                    </Link>
-                )) : (
-                    <h1>Nenhum artigo encontrado!</h1>
-                )}
+            <div className='articles'>
+                <ul className='articles'>
+                    {articles.length > 0 && articles.map((article) => (
+                        <li>
+                            <ArticleCard key={article._id}
+                                title={article.title} id={article._id}
+                                summary={article.summary} />
+                        </li>
+                    ))}
+                </ul>
             </div>
 
         </div>

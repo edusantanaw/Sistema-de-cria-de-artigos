@@ -16,20 +16,18 @@ function Articles() {
             }).then(resp => resp.json())
                 .then((data) => {
                     setCategory(data)
-                    console.log(data)
-
                 }).catch(err => console.log(err))
     }, [])
 
     return (
         <>
             <div className={styles.category}>
-                <h1>Categorias:</h1>
+                <h1>Categorias</h1>
                 <div>
                     {category.length > 0 &&
-                        category.map((category) => (
-                            <div className={styles.category_card}>
-                                <Link to={`/category/${category.name}`}>
+                        category.map((category, i) => (
+                            <div key = {i} className={styles.category_card}>
+                                <Link  to={`/category/${category.name}`}>
                                     <div className={styles.card}>
                                         <h1>{category.name}</h1>
                                         <img src={`http://localhost:5000/images/category/${category.img.filename}`} alt="categoryImg" />

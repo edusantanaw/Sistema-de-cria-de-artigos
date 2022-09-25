@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState({})
     const [signed, setSigned] = useState(false)
+    const [error, setError] = useState('')
 
     useEffect(() => {
         const storagedUser = localStorage.getItem('@App:user');
@@ -29,9 +30,30 @@ export const AuthProvider = ({ children }) => {
 
     async function Login(email, password) {
 
-        const response = await api.post('/user/login', {
+        await api.post('/user/login', {
             email: email,
             password: password
+        })
+            .then((response) => {
+                api.defaults.headers.Authorization = `Bearer ${response.data.token}`
+                localStorage.setItem('@App:user', JSON.stringify(response.data.user))
+                localStorage.setItem('@App:token', response.data.token)
+
+                setUser(response.data.user)
+                setSigned(true)
+            })
+            .catch((err) => {
+                setError(err.response.data)
+            })
+    }
+
+    async function Signup(name, email, password, confirmPassword) {
+
+        const response = await api.post('/user/createAccount', {
+            name: name,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword
         })
         if (response.data.user && response.data.token) {
             api.defaults.headers.Authorization = `Bearer ${response.data.token}`
@@ -43,34 +65,26 @@ export const AuthProvider = ({ children }) => {
             return true
         }
         else
-        return false
-
+            return false
     }
 
-    async function Signup(name, email, password, confirmPassword) {
-
-        const response = await api.post('/user/createAccount', {
-            name: name,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword
-        })
-        if(response.data.user && response.data.token){
-            api.defaults.headers.Authorization = `Bearer ${response.data.token}`
-            localStorage.setItem('@App:user', JSON.stringify(response.data.user))
-            localStorage.setItem('@App:token', response.data.token)
-
-            setUser(response.data.user)
-            setSigned(true)
-            console.log(signed)
-            return true
-        }
-        else
-        return false
+    async function newArticle(token, category, summary, title, content) {
+        await api.post('/article/articles/newArticle', {
+            category: category,
+            summary: summary,
+            title: title,
+            content: content,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })  .then((resp) => console.log(resp))
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
-        <AuthContext.Provider value={{ signed, user, Login, Logout, Signup }} >
+        <AuthContext.Provider value={{ signed, user, Login, Logout, Signup, error, newArticle }} >
             {children}
         </AuthContext.Provider>
     )
