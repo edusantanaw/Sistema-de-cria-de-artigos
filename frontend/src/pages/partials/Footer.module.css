@@ -1,0 +1,16 @@
+footer{
+    width: 100%;
+    text-align: center;
+    height: 10vh;
+    background-color: black;
+    color: #fff;
+}
+
+footer p {
+    padding-top: 20px;
+    font-size: 1.1em;
+}
+
+footer span {
+    color: rgb(167, 9, 9);
+}

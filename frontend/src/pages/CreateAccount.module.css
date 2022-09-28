@@ -1,18 +1,27 @@
 .create_account{
     width: 100%;
-    height: 100vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    margin-top: 50px;
 }
 
 .create_account form{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 340px;
     height: 500px;
-    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.47);
+}
+.create_account h1{
+    color: #fff;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .create_account form label{
@@ -21,14 +30,29 @@
     font-size: 1.2em;
 }
 .create_account form input[type = text], input[type = password] {
+    width: 300px;
     height: 40px;
     border-radius: 4px;
     border: none;
     margin-bottom: 40px;
+    font-size: 0.8em;
+    padding: 15px;
 }
 .create_account form input[type= submit]{
-    height: 40px;
+    height: 45px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: rgb(13, 17, 225);
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.1;
+}
 
+
+.create_account form input[type= submit]:hover{
+    background-color: rgb(11, 11, 130);
+    color: rgb(180, 168, 168);
 }
 
 .create_account span{

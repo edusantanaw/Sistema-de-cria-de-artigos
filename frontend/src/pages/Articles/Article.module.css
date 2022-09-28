@@ -1,0 +1,39 @@
+
+.article{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 100px;
+}
+.article h1{
+    align-self: center;
+    font-size: 2.3em;
+    padding: 30px;
+    color: rgb(42, 41, 41);
+    font-weight: 600;
+    text-shadow:  2px 2px rgba(55, 54, 54, 0.533);
+}
+
+.article p {
+    width: 70%;
+    align-self: center;
+    font-size: 1.3em;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.article p::first-letter{
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 900px){
+
+    .article {
+        padding: 4px;
+    }
+    .article p {
+        width: 90%;
+    }
+}

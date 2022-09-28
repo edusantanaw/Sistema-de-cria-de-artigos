@@ -1,42 +1,50 @@
 import style from './Nav.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth} from '../../context/Auth'
+import { useAuth } from '../../context/Auth'
 import { useState } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { FaAngleRight } from 'react-icons/fa'
 
 
-function Nav(){
-    
+export default function Nav() {
+
     const [visible, setVisible] = useState(false)
     const auth = useAuth()
-    const signed = auth.signed
-    let id =''
+    const navigate = useNavigate()
+    const [menuVisible, setMenuVisible] = useState(false)
 
-    if(signed){
-        id = auth.user._id
+    let user = localStorage.getItem('@App:user')
+
+    if (user) {
+        user = JSON.parse(user)
     }
-    const navigate = useNavigate
 
-    
-    const handleLogout = async () =>{
-       await auth.Logout()
+    const handleLogout = async () => {
+        await auth.Logout()
         navigate('/')
     }
 
-    const isVisible = () =>{
+    const isVisible = () => {
         visible ? setVisible(false) : setVisible(true)
     }
+    const handleMenu = () => {
+        menuVisible ? setMenuVisible(false) : setMenuVisible(true)
+    }
 
-    return(
+    return (
         <header>
-            <h1><Link>logo</Link></h1>
-            <ul>
-                <li><Link to ='/'>Home</Link></li>
-                <li><Link to ='/articles'>Artigos</Link></li>
-                { signed ?  <li><Link to= {`myarticles/${id}`} >Meus Artigos</Link></li> : <li><Link to ='/login'>Login</Link></li>}
-                { signed && <li onClick={isVisible}><span>Perfil</span> {
-                    visible &&  <ul className={style.perfil}>
-                        <li><Link> Alterar senha</Link></li>
-                        <li><Link> Alterar email/nome</Link></li>
+            <h1><Link to='/'>logo</Link></h1>
+            {!menuVisible && <GiHamburgerMenu onClick={handleMenu} id={style.menu} />}
+            <ul className={menuVisible ? style.menuVisible : ''}>
+                <FaAngleRight className={style.close} onClick ={handleMenu} />
+                <li><Link to='/'>Home</Link></li>
+                {user ? user.admin && <li><Link to='/admin'>Admin</Link></li> : ''}
+                <li><Link to='/articles'>Artigos</Link></li>
+                {user ? <li><Link to={`myarticles/${user._id}`} >Meus Artigos</Link></li> : <li><Link to='/login'>Login</Link></li>}
+                {user && <li onClick={isVisible}><span>{user.name}</span> {
+                    visible && <ul className={style.perfil}>
+                        <li><Link to={`/editPassword/${user._id}`}> Alterar senha</Link></li>
+                        <li><Link to={`/editEmail/${user._id}`}> Alterar email/nome</Link></li>
                         <li onClick={handleLogout}>Sair</li>
                     </ul>
                 } </li>}
@@ -44,4 +52,3 @@ function Nav(){
         </header>
     )
 }
-export default Nav

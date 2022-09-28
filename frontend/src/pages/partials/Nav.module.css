@@ -11,16 +11,30 @@ header{
 }
 
 header ul{
-    width: 60%;
+    width: 90%;
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
 }
+
+header ul li{
+    margin-left: 10px;
+}
+header ul a, header span{
+    padding: 20px;
+    transition: 0.1s;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+header ul a:hover, header span:hover{
+    color: rgb(195, 13, 13);
+}
+
+
 header h1{
     color: #fff;
 }
-
-header span{
-    cursor: pointer;
+header a, header span{
+    text-decoration: none;
     color: #fff;
 }
 
@@ -28,21 +42,33 @@ header span{
     margin-top: 25px;
     position: absolute;
     width: 140px;
-    height: 150px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    background-color: aliceblue;
+    background-color: #000;
+    border-radius: 5px;
+    z-index: 1;
+    box-shadow: 2px 2px 7px  rgb(46, 45, 45);
 }
 
-.perfil li{
+.perfil li a, .perfil li{
     font-size: 0.8em;
+    padding: 0px;
+    color: #fff;
+    cursor: pointer;
     margin-left: 5px;
+    padding: 0px;
+    font-weight: 300;
+   
 }
-.perfil li a{
-    color: #000;
-
+.perfil li:last-child{
+    font-size: 0.68em;
+    margin-left: 10px;
+}
+.perfil li:last-child:hover{
+    color: rgb(195, 13, 13);
 }
 
 header li{
@@ -50,7 +76,94 @@ header li{
     font-size: 1.3em;
 }
 
-header a{
-    text-decoration: none;
+@media (max-width: 950px){
+    header{
+        padding: 30px 20px;
+    }
+    header ul li a {
+        margin-left: 3px;
+        padding: 10px 5px;
+    }
+}
+
+#menu{
     color: #fff;
+    width: 50px;
+    height: 50px;
+    display: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+#menu:hover{
+    color: rgb(192, 188, 188);
+    background-color: rgba(253, 250, 250, 0.248);
+    border-radius: 5px;
+}
+
+.close{
+    color: rgb(255, 0, 0);
+    height: 40px;
+    width: 40px;
+    display: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.close:hover{
+    background-color: rgba(255, 255, 255, 0.187);
+
+}
+
+@media (max-width: 670px){
+    header{
+        justify-items: flex-end;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    header ul{
+        display: none;
+    }
+    header h1{
+        justify-self: flex-end;
+        color: aqua;
+    }
+    #menu{
+        display: block;
+        
+    }
+
+    header ul.menuVisible{
+        position: fixed;
+        display: flex;
+        margin: -30px 58%;
+        flex-direction: column;
+        height: 100%;
+        width: 250px;
+        background-color: #000;
+        align-self: flex-start;
+        justify-content: flex-start;
+        z-index: 1;
+        border-left: 1.3px solid rgba(255, 251, 251, 0.233);
+    }
+    header ul.menuVisible .close{
+        display: block;
+    }
+    .menuVisible li{
+        margin-top: 30px;
+    }
+    .menuVisible a{
+        padding: 20px;
+    }
+    .perfil  {
+        margin-top: 10px;
+        width: 90%;
+        height: 170px;
+        box-shadow: none;
+        border: 1px solid #fff;
+    }
+
+    .perfil li {
+        margin: 10px;
+        padding: 10px 20px;
+    }
+
 }

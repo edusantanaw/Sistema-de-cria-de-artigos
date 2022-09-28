@@ -5,11 +5,11 @@ const storage = multer.diskStorage({
             cb(null, 'public/images/category')
     },
     filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + '.png')
+            cb(null, file.fieldname + '-' + Date.now() + '.jpg' || '.png')
     }
 });
 
-const upload = multer({ storage: storage }).single('img');
+const upload = multer({ storage: storage }).single('image');
 const uploadImages = async (req, res, next) => {
     upload(req, res, function( err) {
         if (err) {
@@ -19,17 +19,4 @@ const uploadImages = async (req, res, next) => {
     })
 }
 
-// const uploadImages = async (req, res, next) => {
-//     parser.single('category')(req, res, err => {
-//         if (err) {
-//             throw err
-//         } else {
-//             const image = {}
-//             console.log(req.file)
-//             image.id = req.file
-//             image.url = `/images/category/${image.id}`
-//             next()
-//         }
-//     })
-// }
 module.exports = uploadImages

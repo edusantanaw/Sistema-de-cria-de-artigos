@@ -8,7 +8,6 @@ function Article() {
     const [article, setArticle] = useState([])
 
     useEffect(() => {
-        setTimeout(() => {
             fetch(`http://localhost:5000/article/article/${id.id}`, {
                 method: 'GET',
                 headers: {
@@ -21,7 +20,6 @@ function Article() {
                 .catch((err) => {
                     console.log(err)
                 })
-        }, 100)
 
     }, [])
 

@@ -3,6 +3,7 @@ const { existsOrError } = require('../../helper/validations')
 const getToken = require('../../helper/get-token')
 const getUserByToken = require('../../helper/get-user-by-token')
 const Categories = require('../../models/Category')
+const updateTotArticles = require('./updateCategory')
 
 const createArticle = async (req, res) => {
 
@@ -20,7 +21,7 @@ const createArticle = async (req, res) => {
             let msg = 'Esta categoria não Existe!'
             throw msg
         }
-        categoryName.totArticles += 1
+
         
         const article = new Article({
             category: category,
@@ -33,13 +34,8 @@ const createArticle = async (req, res) => {
                 email: user.email,
             }
         })
-        await Categories.findOneAndUpdate(
-            {_id: categoryName._id},
-            {$set: categoryName},
-            {new: true}
-        )
-
         await article.save()
+        await updateTotArticles(category)
         res.status(200).send('Artigo criado com sucesso!')
 
     } catch (msg) {

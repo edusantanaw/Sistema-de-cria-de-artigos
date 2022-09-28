@@ -24,14 +24,11 @@ export default function CreateAccount() {
     return (
         <main className={style.create_account}>
             <form onSubmit={handleCreate}>
-                <label>Nome</label>
-                <input type="text" value={name} onChange={e => setName(e.target.value)} />
-                <label>Email</label>
-                <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-                <label>Password</label>
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                <label>Confirm password</label>
-                <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                <h1>Create account</h1>
+                <input maxLength='20' type="text" placeholder='Digite o seu nome...' value={name} onChange={e => setName(e.target.value)} />
+                <input type="text" value={email} placeholder="Digite o seu email..." onChange={e => setEmail(e.target.value)} />
+                <input type="password" value={password} placeholder='Digite a sua senha' onChange={e => setPassword(e.target.value)} />
+                <input type="password" value={confirmPassword} placeholder="Digite a confirmação de senha" onChange={e => setConfirmPassword(e.target.value)} />
                 <input type="submit" />
             </form>
         </main>

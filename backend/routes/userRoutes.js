@@ -14,6 +14,6 @@ router.put('/editPassword/:id', updateUser.editPassword)
 router.put('/editEmail/:id',verifyToken, updateUser.editEmailAndName )
 router.delete('/deleteUser/:id',getAdminByToken, updateUser.removeUser)
 router.put('/edit/:id',getAdminByToken, updateUser.editUser)
-router.get('/getUser/:id', getAdminByToken, getUserByID)
+router.get('/getUser/:id', getUserByID)
 
 module.exports = router

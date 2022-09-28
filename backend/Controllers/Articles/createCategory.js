@@ -6,6 +6,7 @@ const createCategory = async(req, res)=> {
     const img = req.file
     try{
         existsOrError(category, 'O nome da categoria é necessaria!')
+        existsOrError(img, 'A imagem é necessaria!')
         const categories = await Categories.findOne({name: category})
         if(categories){
             let msg = 'Esta categoria ja existe!'

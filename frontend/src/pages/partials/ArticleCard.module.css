@@ -1,31 +1,122 @@
-.articles{
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}
-
-.articles_card{
+.articles_card {
     color: #fff;
     width: 200px;
     height: 300px;
-    background-color:rgb(194, 10, 244);
+    background-color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 7px;
-    margin-left:  15px;
-    box-shadow: 3px 3px  rgb(144, 144, 144);
+    margin-left: 15px;
+    margin-bottom: 15px;
+    box-shadow: 3px 3px rgb(144, 144, 144);
+    transition: 0.2s;
+    position: relative;
 }
 
-.articles_card h1{
+.articles_card:hover{
+    box-shadow: 4px 4px rgb(197, 22, 22);
+    background-color: rgb(19, 18, 18);
+    transform: scale(1.04);
+}
+
+.articles_card h1 {
     padding: 20px;
     font-size: 1.2em;
-
+    font-weight: 600;
+    color: rgb(251, 251, 251);
+    letter-spacing: 2px;
+    
 }
-.articles a{
+.articles_card p{
+    font-size: 1.1em !important;
+    color: rgb(190, 188, 188);
+    letter-spacing: 1px;
+}
+.articles_card p::first-letter{
+    text-transform: upperCase;
+}
+
+.articles a {
     text-decoration: none;
 }
+
+.icons {
+    margin-right: 10px;
+    display: flex;
+    padding-top: 130%;
+    align-self: flex-end;
+    position: absolute;
+}
+.trash{
+    color: rgb(215, 14, 14);
+    margin-right: 10px;
+    transition: 0.1s;
+}
+.edit{
+    color: rgb(15, 15, 202);
+    transition: 0.1s;
+}
+.trash:hover, .edit:hover{
+    transform: scale(1.15);
+}
+
 .articles_card p {
-    padding-left: 20px;
+    align-self: flex-start;
+    margin-left: 15px;
     font-size: 1.3em;
 }
+
+.delete_content {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    position: absolute;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    box-shadow: 2px 1px 4px 4px rgba(255, 255, 255, 0.36);
+}
+
+.delete_content p {
+    font-size: 1.4em;
+    margin: 10px 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.delete_buttons {
+    margin: 10px 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.delete_buttons button {
+    width: 48%;
+    height: 40px;
+    border-radius: 3px;
+    border: none;
+    font-size: 1em;
+    font-weight: 300;
+    cursor: pointer;
+    transition: 0.1s;
+    color: #fff;
+}
+.delete_buttons button:hover{
+    box-shadow: 1px 1px 2px 1px rgba(255, 255, 255, 0.235);
+    color: #fff;
+    border: none;
+}
+
+.delete_buttons button:first-child {
+    background-color: rgb(216, 3, 3);
+}
+
+.delete_buttons button:last-child{
+    background-color: rgba(255, 255, 255, 0.618);
+}
+
+

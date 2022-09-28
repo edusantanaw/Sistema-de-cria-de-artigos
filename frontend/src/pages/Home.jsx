@@ -1,12 +1,11 @@
 import styles from './Home.module.css'
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 
 function Articles() {
 
     const [category, setCategory] = useState([])
-
+    
     useEffect(() => {
             fetch('http://localhost:5000/article/category', {
                 method: "GET",
@@ -31,12 +30,13 @@ function Articles() {
                                     <div className={styles.card}>
                                         <h1>{category.name}</h1>
                                         <img src={`http://localhost:5000/images/category/${category.img.filename}`} alt="categoryImg" />
-                                        <p>total de articles: {category.totArticles}</p>
+                                        <p>total de artigos: {category.totArticles}</p>
                                     </div>
                                 </Link>
                             </div>
                         ))}
                 </div>
+                {!category && <span>Nenhuma categoria encontrada...</span>}
             </div>
         </>
     )
