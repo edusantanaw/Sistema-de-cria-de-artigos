@@ -40,7 +40,7 @@
     color: #fff;
     text-decoration: none;
     background-color: #000;
-    transition: 0.2s;
+    transition: 0.15s;
 }
 .card:hover{
     box-shadow: 5px 5px 2px rgb(34, 33, 33);

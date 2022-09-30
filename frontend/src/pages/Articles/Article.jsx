@@ -1,30 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './Article.module.css'
+import api from '../../services/api'
 
 function Article() {
 
     const id = useParams()
     const [article, setArticle] = useState([])
+    const [error, setError] = useState()
+
 
     useEffect(() => {
-            fetch(`http://localhost:5000/article/article/${id.id}`, {
-                method: 'GET',
+        api.get(`/article/article/${id.id}`, {
                 headers: {
                     "Content-type": "application/json"
                 }
-            }).then((data) => data.json())
-                .then((data) => {
-                    setArticle(data)
+            })
+                .then((resp) => {
+                    setArticle(resp.data)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    setError(err.response.data)
                 })
 
-    }, [])
+    }, [id.id])
+
 
     return (
         <>
+                {error && <span>{error}</span>}
             {(
                 <div className={styles.article}>
                     <h1>{article.title}</h1>

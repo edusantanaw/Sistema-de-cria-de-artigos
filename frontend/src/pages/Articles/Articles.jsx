@@ -22,13 +22,13 @@ export default function Articles() {
                 setArticle(resp.data)
 
             }).catch((err) => {
-                setError(err)
+                setError(err.response.data)
             })
     }, [msg])
 
     const deleteArticle = (articleId, e) => {
         e.preventDefault()
-        api.delete(`http://localhost:5000/article/articles/delete/${articleId}`, {
+        api.delete(`/article/articles/delete/${articleId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -37,7 +37,7 @@ export default function Articles() {
         })
             .catch((err) => {
                 console.log(err)
-                setMessage(err.response)
+                setMessage(err.response.data)
             })
     }
 
@@ -71,7 +71,7 @@ export default function Articles() {
                         </li>
                     ))}
                 </ul>
-                {!articles[0] && <span>Nenhuma artigo encontrado!</span>}
+                {err && <span>{err}</span>}
             </main>
     )
 }

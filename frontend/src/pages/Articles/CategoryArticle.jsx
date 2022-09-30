@@ -9,70 +9,69 @@ function CategoryaArticle() {
     const [articles, setArticles] = useState([])
     const category = useParams()
     const [msg, setMessage] = useState({})
-
+    const [error, setError] = useState('')
     const token = localStorage.getItem('@App:token')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/article/category/articles/${category.name}`, {
-            method: 'GET',
+        api.get(`/article/category/articles/${category.name}`, {
+
             headers: { 'Content-type': 'application/json' }
-        }).then((data) => data.json())
-            .then((data) => {
-                setArticles(data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-
-    }, [msg])
-
-    const deleteArticle = (articleId, e) => {
-        e.preventDefault()
-        api.delete(`http://localhost:5000/article/articles/delete/${articleId}`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }).then((resp) => {
-            setMessage(resp)
         })
-            .catch((err) => {
-                console.log(err)
-                setMessage(err.response)
-            })
-    }
+        .then((resp) => {
+            setArticles(resp.data)
+        })
+        .catch((err) => {
+            setError(err.response.data)
+        })
 
-        if(msg) {
-            setTimeout(()=>{
-                setMessage('')
-            },1000)
+}, [msg, category.name])
+
+const deleteArticle = (articleId, e) => {
+    e.preventDefault()
+    api.delete(`/article/articles/delete/${articleId}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
         }
+    }).then((resp) => {
+        setMessage(resp)
+    })
+        .catch((err) => {
+            setError(err.response.data)
+        })
+}
 
-    return (
-        <div className='content'>
-            <div className="h1_button">
-                <h1>Artigos</h1>
-                {msg && msg.status === 200 ?
+if (msg) {
+    setTimeout(() => {
+        setMessage('')
+    }, 1000)
+}
+
+return (
+    <div className='content'>
+        <div className="h1_button">
+            <h1>Artigos</h1>
+            {msg && msg.status === 200 ?
                 <Message type="success" msg={msg.data} /> : <Message type='error' msg={msg.data} />
             }
-                <Link to='/craeteArticle'><button>Novo artigo</button></Link>
-            </div>
-            <div className='articles'>
-                <ul className='articles'>
-                    {articles.length > 0 && articles.map((article, i) => (
-                        <li key={i}>
-                            <ArticleCard key={article._id}
-                                title={article.title} id={article._id}
-                                summary={article.summary} 
-                                userId = {article.user._id}
-                                deleter= {deleteArticle}
-                                />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-                        {!articles[0] && <span>Nenhuma artigo encontrado!</span>}
+            <Link to='/craeteArticle'><button>Novo artigo</button></Link>
         </div>
-    )
+        <div className='articles'>
+            <ul className='articles'>
+                {articles.length > 0 && articles.map((article, i) => (
+                    <li key={i}>
+                        <ArticleCard key={article._id}
+                            title={article.title} id={article._id}
+                            summary={article.summary}
+                            userId={article.user._id}
+                            deleter={deleteArticle}
+                        />
+                    </li>
+                ))}
+            </ul>
+        </div>
+        {error && <span>{error}</span>}
+    </div>
+)
 }
 
 export default CategoryaArticle

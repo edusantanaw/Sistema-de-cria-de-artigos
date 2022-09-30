@@ -2,7 +2,6 @@ import api from "../../services/api"
 import { useState, useEffect } from "react"
 import styles from './Admin.module.css'
 import { useNavigate } from "react-router-dom"
-import Message from "../partials/Message"
 
 export default function User() {
 
@@ -11,7 +10,6 @@ export default function User() {
     const [error, setError] = useState('')
     const [category, setCategory] = useState('')
     const [image, setImage] = useState()
-
 
     const history = useNavigate()
     useEffect(() => {
@@ -25,7 +23,9 @@ export default function User() {
             }).catch((err) => {
                 setError(err.response.data)
             })
-    }, [])
+    }, [token])
+
+  
     const handleUpload = (e) => {
         const image = e.target.files[0]
         setImage(image)

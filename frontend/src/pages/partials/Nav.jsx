@@ -14,7 +14,6 @@ export default function Nav() {
     const [menuVisible, setMenuVisible] = useState(false)
 
     let user = localStorage.getItem('@App:user')
-
     if (user) {
         user = JSON.parse(user)
     }

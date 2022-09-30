@@ -12,11 +12,10 @@ export default function MyArticles() {
     const token = localStorage.getItem('@App:token')
     const [msg, setMessage] = useState({})
     const location = useLocation()
-
-
+    const [err, setError] = useState('')
 
     useEffect(() => {
-        api.get(`http://localhost:5000/article/articles/${id}`, {
+        api.get(`/article/articles/${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
@@ -25,14 +24,14 @@ export default function MyArticles() {
             setMyArticles(resp.data)
         })
             .catch((err) => {
-                setMessage(err)
+                setError(err.response.data)
             }
             )
-    }, [msg])
+    }, [msg, id, token])
 
     const deleteArticle = (articleId, e) => {
         e.preventDefault()
-        api.delete(`http://localhost:5000/article/articles/delete/${articleId}`, {
+        api.delete(`/article/articles/delete/${articleId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -40,8 +39,7 @@ export default function MyArticles() {
             setMessage(resp)
         })
             .catch((err) => {
-                console.log(err)
-                setMessage(err.response)
+                setMessage(err.response.data)
             })
     }
 
@@ -73,7 +71,7 @@ export default function MyArticles() {
                     </li>
                 ))}
             </ul>
-            {!MyArticles[0] && <span>Nenhum aritigo encontrado!</span>}
+            {err && <span>{err}</span>}
         </main>
     )
 }

@@ -46,7 +46,7 @@ function App() {
           <Route path='/craeteArticle' element={<RequireAuth><CreateArticle /></RequireAuth>} />
           <Route path = '/editPassword/:_id' element ={<RequireAuth><Password/></RequireAuth>} />
           <Route path = '/editEmail/:_id' element ={<RequireAuth><ChangeInfo/></RequireAuth>} />
-          <Route path = '/admin' element={<RequireAuth>{ user ? user.admin && <Admin />: ''}</RequireAuth>} />
+          <Route path = '/admin' element={<RequireAuth>{user && user.admin && <Admin />}</RequireAuth>} />
           <Route path = '/article/edit/:_id' element = {<RequireAuth><EditArticle/></RequireAuth>} />
         </Routes>
       </AuthProvider>
