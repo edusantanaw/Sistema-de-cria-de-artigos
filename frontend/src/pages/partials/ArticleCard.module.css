@@ -32,6 +32,7 @@
     font-size: 1.1em !important;
     color: rgb(190, 188, 188);
     letter-spacing: 1px;
+    overflow: hidden;
 }
 .articles_card p::first-letter{
     text-transform: upperCase;

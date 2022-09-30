@@ -15,6 +15,7 @@ function Articles() {
                 'Content-Type': 'application/json'
             }
         }).then((resp) => {
+            console.log(resp.data)
             setCategory(resp.data)
         }).catch((err) => {
         
