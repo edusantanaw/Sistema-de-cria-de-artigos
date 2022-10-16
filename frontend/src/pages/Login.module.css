@@ -64,6 +64,11 @@
     color: blue;
 }
 
+.login label{
+    width: 92%;
+    text-align: start;
+    color: #fff;
+}
 form input:focus{
     box-shadow: 0px 0px 0px 0px;
     outline: 0;

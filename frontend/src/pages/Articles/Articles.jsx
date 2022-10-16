@@ -33,6 +33,7 @@ export default function Articles() {
                 "Authorization": `Bearer ${token}`
             }
         }).then((resp) => {
+            console.log(resp)
             setMessage(resp)
         })
             .catch((err) => {

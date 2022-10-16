@@ -12,6 +12,8 @@ const removeArticleById = async (req, res) => {
         const article = await Article.findOne({ _id: id })
         checkExists(article, 'Artigo não encontrado!') 
 
+        console.log('ola')
+
         await updateTotArticles(article.category)
         await Article.findOneAndDelete({ _id: id })
         res.status(200).send('Artigo deletado com sucesso!')

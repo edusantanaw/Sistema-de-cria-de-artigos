@@ -14,7 +14,9 @@ const userEqualsOrError = async (req, res, next) => {
     let id = ''
     if (article) {
          id = article.user._id
-    } const admin = user.admin
+    } 
+    let admin = ''
+    if(user) admin = user.admin
 
     try {
         if (userId === id || admin) {

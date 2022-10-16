@@ -25,7 +25,9 @@ export default function Login() {
             <p>{errorExists}</p>
             <form onSubmit={handleLogin}>
                 <h1>Login</h1>
+                <label htmlFor="email">Email</label>
                 <input type="text" placeholder="Digite seu email..." value={email} onChange={e => setEmail(e.target.value)} />
+                <label htmlFor="password">Senha</label>
                 <input type="password" autoComplete="on" placeholder="Digite a sua senha..." value={password} onChange={e => setPassword(e.target.value)} />
                 <input type="submit" />
                 <span>Deseja criar uma conta? <Link to='/createAccount'>Criar conta</Link></span>
